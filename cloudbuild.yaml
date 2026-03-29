@@ -43,6 +43,7 @@ steps:
       ]
 substitutions:
   _JWT_SECRET: "change-me"
-  _API_BASE_URL: "https://cheer-api-274005226408.us-west4.run.app"
+  _API_BASE_URL: "https://cheer-api-sdlvxjlaiq-wn.a.run.app"
 options:
   logging: CLOUD_LOGGING_ONLY
+
