@@ -2,7 +2,11 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "gcr.io/$PROJECT_ID/cheer-api", "-f", "Dockerfile.backend", "."]
   - name: gcr.io/cloud-builders/docker
+    args: ["push", "gcr.io/$PROJECT_ID/cheer-api"]
+  - name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "gcr.io/$PROJECT_ID/cheer-ui", "-f", "Dockerfile.frontend", "."]
+  - name: gcr.io/cloud-builders/docker
+    args: ["push", "gcr.io/$PROJECT_ID/cheer-ui"]
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
     args:
       [
@@ -37,9 +41,6 @@ steps:
         "--set-env-vars",
         "API_BASE_URL=${_API_BASE_URL}"
       ]
-images:
-  - gcr.io/$PROJECT_ID/cheer-api
-  - gcr.io/$PROJECT_ID/cheer-ui
 substitutions:
   _JWT_SECRET: "change-me"
   _API_BASE_URL: "https://cheer-api-xxxxx.a.run.app"
