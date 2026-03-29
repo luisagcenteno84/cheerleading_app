@@ -6,7 +6,7 @@ MVP web app for cheerleading competition management: event setup, team registrat
 - Backend: FastAPI
 - Frontend: Streamlit
 - DB: Firestore
-- Hosting: Cloud Run
+- Hosting: Cloud Run (us-west4)
 - CI/CD: Cloud Build
 
 ## Local Development
@@ -41,3 +41,4 @@ gcloud builds submit --config cloudbuild.yaml
 ## Notes
 - First-time setup: use the Streamlit "Bootstrap Admin" form to create the initial admin account.
 - Tie-breaker: higher **Execution** category total wins.
+- Production deployment is pinned to **us-west4** to control costs.
