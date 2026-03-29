@@ -43,3 +43,5 @@ images:
 substitutions:
   _JWT_SECRET: "change-me"
   _API_BASE_URL: "https://cheer-api-xxxxx.a.run.app"
+options:
+  logging: CLOUD_LOGGING_ONLY
