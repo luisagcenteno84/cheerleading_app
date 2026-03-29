@@ -1,0 +1,45 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/cheer-api", "-f", "Dockerfile.backend", "."]
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/cheer-ui", "-f", "Dockerfile.frontend", "."]
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      [
+        "gcloud",
+        "run",
+        "deploy",
+        "cheer-api",
+        "--image",
+        "gcr.io/$PROJECT_ID/cheer-api",
+        "--region",
+        "us-central1",
+        "--platform",
+        "managed",
+        "--allow-unauthenticated",
+        "--set-env-vars",
+        "JWT_SECRET=${_JWT_SECRET},FIRESTORE_PROJECT=$PROJECT_ID"
+      ]
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      [
+        "gcloud",
+        "run",
+        "deploy",
+        "cheer-ui",
+        "--image",
+        "gcr.io/$PROJECT_ID/cheer-ui",
+        "--region",
+        "us-central1",
+        "--platform",
+        "managed",
+        "--allow-unauthenticated",
+        "--set-env-vars",
+        "API_BASE_URL=${_API_BASE_URL}"
+      ]
+images:
+  - gcr.io/$PROJECT_ID/cheer-api
+  - gcr.io/$PROJECT_ID/cheer-ui
+substitutions:
+  _JWT_SECRET: "change-me"
+  _API_BASE_URL: "https://cheer-api-xxxxx.a.run.app"
